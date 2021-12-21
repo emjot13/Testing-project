@@ -12,6 +12,7 @@ class Tests(unittest.TestCase):
     def test_assert_init_index_equals_0(self):
         assert_that(self.temp.index).is_equal_to(0)     # checking if starting index that will be incremented automatically is 0
 
+
     def test_correct_instance(self):
         assert_that(self.temp).is_instance_of(E_gradebook)
 
@@ -35,3 +36,18 @@ class Tests(unittest.TestCase):
 
     def test_assert_student_has_full_name_space_after(self):
         assert_that(self.temp.add_student).raises(ValueError).when_called_with("Kasia ")
+
+    def test_add_student_returns_correctly(self):
+        self.temp.add_student("Kasia K")
+        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+
+    def test_add_student_returns_correctly_for_5_students(self):
+        for x in range(5):
+            self.temp.add_student("Kasia K")
+        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+
+    def test_add_student_returns_correctly_for_10_students(self):
+        for x in range(10):
+            self.temp.add_student("Kasia K")
+        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{6: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{7: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{8: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{9: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{10: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+
