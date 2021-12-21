@@ -5,8 +5,8 @@ import unittest
 class Tests(unittest.TestCase):
     def setUp(self):
         self.temp = E_gradebook()
-        self.delete = E_gradebook()
-        self.delete.add_student("Kasia K")
+        self.temp1 = E_gradebook()
+        self.temp1.add_student("Kasia K")
 
     def test_assert_init_object_is_empty(self):
         assert_that(bool(self.temp.students)).is_false() # checking if initial value of object is empty
@@ -55,52 +55,86 @@ class Tests(unittest.TestCase):
 
 
 
-    def test_delete_student_is_none(self):
-        assert_that(self.delete.delete_student).raises(TypeError).when_called_with(None)
+    def test_delete_student_index_is_none(self):
+        assert_that(self.temp1.delete_student).raises(TypeError).when_called_with(None)
 
-    def test_delete_student_is_str(self):
-        assert_that(self.delete.delete_student).raises(TypeError).when_called_with("10")
+    def test_delete_student_index_is_str(self):
+        assert_that(self.temp1.delete_student).raises(TypeError).when_called_with("10")
 
-    def test_delete_student_is_dict(self):
-        assert_that(self.delete.delete_student).raises(TypeError).when_called_with({0: 0})
+    def test_delete_student_index_is_dict(self):
+        assert_that(self.temp1.delete_student).raises(TypeError).when_called_with({0: 0})
 
-    def test_delete_student_is_list(self):
-        assert_that(self.delete.delete_student).raises(TypeError).when_called_with([0])
+    def test_delete_student_index_is_list(self):
+        assert_that(self.temp1.delete_student).raises(TypeError).when_called_with([0])
+
+    def test_delete_student_index_is_float(self):
+        assert_that(self.temp1.delete_student).raises(TypeError).when_called_with(0.0)
 
     def test_delete_student_no_student_with_given_index(self):
-        assert_that(self.delete.delete_student).raises(ValueError).when_called_with(1)
+        assert_that(self.temp1.delete_student).raises(ValueError).when_called_with(1)
 
     def test_delete_student_no_student_with_negative_index(self):
-        assert_that(self.delete.delete_student).raises(ValueError).when_called_with(-1)
+        assert_that(self.temp1.delete_student).raises(ValueError).when_called_with(-1)
 
     def test_delete_student_successful(self):
-        self.delete.delete_student(0)
-        assert_that(bool(self.delete.students)).is_false() # checking if value of object is empty after deleting the only student
+        self.temp1.delete_student(0)
+        assert_that(bool(self.temp1.students)).is_false() # checking if value of object is empty after deleting the only student
 
     def test_delete_5_students_succesful(self):
         for x in range(4):
-            self.delete.add_student("Kasia K")
+            self.temp1.add_student("Kasia K")
         for x in range(5):
-            self.delete.delete_student(x)
-        assert_that(bool(self.delete.students)).is_false()
+            self.temp1.delete_student(x)
+        assert_that(bool(self.temp1.students)).is_false()
 
     def test_delete_15_students_succesful(self):
         for x in range(14):
-            self.delete.add_student("Kasia K")
+            self.temp1.add_student("Kasia K")
         for x in range(15):
-            self.delete.delete_student(x)
-        assert_that(bool(self.delete.students)).is_false()
+            self.temp1.delete_student(x)
+        assert_that(bool(self.temp1.students)).is_false()
 
     def test_delete_150_students_succesful(self):
         for x in range(149):
-            self.delete.add_student("Kasia K")
+            self.temp1.add_student("Kasia K")
         for x in range(150):
-            self.delete.delete_student(x)
-        assert_that(bool(self.delete.students)).is_false()
+            self.temp1.delete_student(x)
+        assert_that(bool(self.temp1.students)).is_false()
 
     def test_students_is_list_after_deleting(self):
-        self.delete.delete_student(0)
-        assert_that(self.delete.students).is_instance_of(list)
+        self.temp1.delete_student(0)
+        assert_that(self.temp1.students).is_instance_of(list)
+
+    def test_assert_edit_student_name_is_none(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(None)
+
+    def test_assert_edit_student_name_is_int(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(10)
+
+    def test_assert_edit_student_name_is_dict(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with({"student": "Anna"})
+
+    def test_assert_edit_student_name_is_list(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(["Kasia"])
+
+
+
+    def test_assert_edit_student_index_is_none(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(None)
+
+    def test_assert_edit_student_index_is_str(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with("10")
+
+    def test_assert_edit_student_index_is_dict(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with({2: "two"})
+
+    def test_assert_edit_student_index_is_tuple(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with((0, 0))
+
+    def test_assert_edit_student_index_is_float(self):
+        assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(0.0)
+
+
 
 
 
