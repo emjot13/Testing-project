@@ -11,3 +11,7 @@ class E_gradebook:
         self.string_error(student)
         if len(student.split()) < 2:
             raise ValueError("Student must have a name and a surname")
+        self.index += 1
+
+
+
