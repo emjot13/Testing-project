@@ -15,3 +15,14 @@ class Tests(unittest.TestCase):
     def test_correct_instance(self):
         assert_that(self.temp).is_instance_of(E_gradebook)
 
+    def test_assert_student_is_none(self):
+        assert_that(self.temp.add_student).raises(TypeError).when_called_with(None)
+
+    def test_assert_student_is_int(self):
+        assert_that(self.temp.add_student).raises(TypeError).when_called_with(10)
+
+    def test_assert_student_is_dict(self):
+        assert_that(self.temp.add_student).raises(TypeError).when_called_with({"student": "Anna"})
+
+    def test_assert_student_is_list(self):
+        assert_that(self.temp.add_student).raises(TypeError).when_called_with(["Kasia"])
