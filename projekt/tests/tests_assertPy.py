@@ -136,6 +136,43 @@ class Tests(unittest.TestCase):
 
 
 
+    def test_assert_edit_student_successful(self):
+        self.temp1.edit_student(0, "Kasia KKK")
+        assert_that(self.temp1.students[0][0][0]).is_equal_to("Kasia KKK")
+
+    def test_edit_5_students_succesful(self):
+        for x in range(4):
+            self.temp1.add_student("Kasia K")
+        for x in range(5):
+            self.temp1.edit_student(x, "Kasia KKK")
+            assert_that(self.temp1.students[x][0][x]).is_equal_to("Kasia KKK")
+
+    def test_edit_15_students_succesful(self):
+        for x in range(14):
+            self.temp1.add_student("Kasia K")
+        for x in range(15):
+            self.temp1.edit_student(x, "Kasia KKK")
+            assert_that(self.temp1.students[x][0][x]).is_equal_to("Kasia KKK")
+
+    def test_edit_150_students_succesful(self):
+        for x in range(149):
+            self.temp1.add_student("Kasia K")
+        for x in range(150):
+            self.temp1.edit_student(x, "Kasia KKK")
+            assert_that(self.temp1.students[x][0][x]).is_equal_to("Kasia KKK")
+
+    def test_edit_student_returns_correct_students_value_1(self):
+        self.temp1.edit_student(0, "Kasia KKK")
+        assert_that(self.temp1.students).is_equal_to([[{0: 'Kasia KKK', 'annotations': {}, 'average grades': {}}, {}]])
+
+    def test_edit_student_returns_correct_students_value_2(self):
+        self.temp1.edit_student(0, "Kasia KKKKKK")
+        assert_that(self.temp1.students).is_equal_to([[{0: 'Kasia KKKKKK', 'annotations': {}, 'average grades': {}}, {}]])
+
+
+
+
+
 
 
 
