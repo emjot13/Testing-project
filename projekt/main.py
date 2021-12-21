@@ -34,6 +34,9 @@ class E_gradebook:
     def edit_student(self, index, new_value):
         self.string_error(new_value)
         self.index_error(index)
+        for item in self.students:
+            if index in item[0].keys():
+                item[0][index] = new_value
 
 
 
