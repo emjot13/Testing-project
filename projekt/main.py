@@ -15,13 +15,21 @@ class E_gradebook:
         self.string_error(student)
         if len(student.split()) < 2:
             raise ValueError("Student must have a name and a surname")
-        self.index += 1
         dic = {self.index: student, "annotations": {}, "average grades": {}}
         new_entry = [dic, {}]
         self.students.append(new_entry)
+        self.index += 1
 
     def delete_student(self, index):
         self.index_error(index)
+        is_index = False
+        for item in self.students:
+            if index in item[0].keys():
+                self.students.remove(item)
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+
 
 
 
