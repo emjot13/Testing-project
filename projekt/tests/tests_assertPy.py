@@ -41,17 +41,17 @@ class Tests(unittest.TestCase):
 
     def test_add_student_returns_correctly(self):
         self.temp.add_student("Kasia K")
-        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+        assert_that(self.temp.students).is_equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
 
     def test_add_student_returns_correctly_for_5_students(self):
         for x in range(5):
             self.temp.add_student("Kasia K")
-        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+        assert_that(self.temp.students).is_equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
 
     def test_add_student_returns_correctly_for_10_students(self):
         for x in range(10):
             self.temp.add_student("Kasia K")
-        assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{6: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{7: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{8: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{9: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{10: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
+        assert_that(self.temp.students).is_equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{6: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{7: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{8: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{9: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
 
 
 
@@ -66,3 +66,42 @@ class Tests(unittest.TestCase):
 
     def test_delete_student_is_list(self):
         assert_that(self.delete.delete_student).raises(TypeError).when_called_with([0])
+
+    def test_delete_student_no_student_with_given_index(self):
+        assert_that(self.delete.delete_student).raises(ValueError).when_called_with(1)
+
+    def test_delete_student_no_student_with_negative_index(self):
+        assert_that(self.delete.delete_student).raises(ValueError).when_called_with(-1)
+
+    def test_delete_student_successful(self):
+        self.delete.delete_student(0)
+        assert_that(bool(self.delete.students)).is_false() # checking if value of object is empty after deleting the only student
+
+    def test_delete_5_students_succesful(self):
+        for x in range(4):
+            self.delete.add_student("Kasia K")
+        for x in range(5):
+            self.delete.delete_student(x)
+        assert_that(bool(self.delete.students)).is_false()
+
+    def test_delete_15_students_succesful(self):
+        for x in range(14):
+            self.delete.add_student("Kasia K")
+        for x in range(15):
+            self.delete.delete_student(x)
+        assert_that(bool(self.delete.students)).is_false()
+
+    def test_delete_150_students_succesful(self):
+        for x in range(149):
+            self.delete.add_student("Kasia K")
+        for x in range(150):
+            self.delete.delete_student(x)
+        assert_that(bool(self.delete.students)).is_false()
+
+    def test_students_is_list_after_deleting(self):
+        self.delete.delete_student(0)
+        assert_that(self.delete.students).is_instance_of(list)
+
+
+
+
