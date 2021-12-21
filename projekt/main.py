@@ -11,8 +11,13 @@ class E_gradebook:
         self.string_error(student)
         if len(student.split()) < 2:
             raise ValueError("Student must have a name and a surname")
+        dic = {self.index: student, "annotations": {}, "average grades": {}}
+        new_entry = [dic, {}]
+        self.students.append(new_entry)
         self.index += 1
-        self.students.append(student)
+
+
+
 
 
 
