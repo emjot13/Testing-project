@@ -26,3 +26,12 @@ class Tests(unittest.TestCase):
 
     def test_assert_student_is_list(self):
         assert_that(self.temp.add_student).raises(TypeError).when_called_with(["Kasia"])
+
+    def test_assert_student_has_full_name(self):
+        assert_that(self.temp.add_student).raises(ValueError).when_called_with("Kasia")
+
+    def test_assert_student_has_full_name_space_before(self):
+        assert_that(self.temp.add_student).raises(ValueError).when_called_with(" Kasia")
+
+    def test_assert_student_has_full_name_space_after(self):
+        assert_that(self.temp.add_student).raises(ValueError).when_called_with("Kasia ")
