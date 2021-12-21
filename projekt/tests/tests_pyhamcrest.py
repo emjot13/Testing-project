@@ -50,3 +50,11 @@ class Tests(unittest.TestCase):
         self.temp.add_student("Kasia K")
         after = self.temp.index
         assert_that(after - before), equal_to(1)
+
+    def test_add_student_successful(self):
+        self.one.add_student("Kasia K")
+        assert_that(bool(self.one.students), is_(True))
+
+    def test_add_student_successful2(self):
+        self.one.add_student("Kasia K")
+        assert_that(bool(self.one.students)), equal_to(1)
