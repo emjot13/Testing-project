@@ -12,6 +12,7 @@ class E_gradebook:
         if len(student.split()) < 2:
             raise ValueError("Student must have a name and a surname")
         self.index += 1
+        self.students.append(student)
 
 
 
