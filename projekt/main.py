@@ -31,6 +31,9 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
 
 
+    def edit_student(self, index, new_value):
+        self.string_error(new_value)
+        self.index_error(index)
 
 
 
