@@ -58,3 +58,46 @@ class Tests(unittest.TestCase):
     def test_add_student_successful2(self):
         self.one.add_student("Kasia K")
         assert_that(bool(self.one.students)), equal_to(1)
+
+    def test_add_student_basic_info_is_dict(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0], instance_of(dict))
+
+    def test_added_correct_value(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0], has_value("Kasia K"))
+
+    def test_add_student_additional_info_is_dict(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][1], instance_of(dict))
+
+
+    def test_add_student_has_annotation_key(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0], has_key("annotations"))
+
+
+    def test_add_student_has_average_grades_key(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0], has_key("average grades"))
+
+    def test_add_annotation_is_dict(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0]["annotations"], instance_of(dict))
+
+    def test_add_student_average_grades_is_dict(self):
+        self.one.add_student("Kasia K")
+        assert_that(self.one.students[0][0]["average grades"], instance_of(dict))
+
+    def test_add_student_annotations_dict_is_empty(self):
+        self.one.add_student("Kasia K")
+        assert_that(bool(self.one.students[0][0]["annotations"]), is_(False))
+
+
+    def test_add_student_average_grades_dict_is_empty(self):
+        self.one.add_student("Kasia K")
+        assert_that(bool(self.one.students[0][0]["average grades"]), is_(False))
+
+    def test_add_student_average_grades_dict_is_empty(self):
+        self.one.add_student("Kasia K")
+        assert_that(bool(self.one.students[0][1]), is_(False))
