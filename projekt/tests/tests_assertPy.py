@@ -5,6 +5,8 @@ import unittest
 class Tests(unittest.TestCase):
     def setUp(self):
         self.temp = E_gradebook()
+        self.delete = E_gradebook()
+        self.delete.add_student("Kasia K")
 
     def test_assert_init_object_is_empty(self):
         assert_that(bool(self.temp.students)).is_false() # checking if initial value of object is empty
@@ -51,3 +53,16 @@ class Tests(unittest.TestCase):
             self.temp.add_student("Kasia K")
         assert_that(self.temp.students).is_equal_to([[{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{5: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{6: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{7: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{8: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{9: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}], [{10: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]])
 
+
+
+    def test_delete_student_is_none(self):
+        assert_that(self.delete.delete_student).raises(TypeError).when_called_with(None)
+
+    def test_delete_student_is_str(self):
+        assert_that(self.delete.delete_student).raises(TypeError).when_called_with("10")
+
+    def test_delete_student_is_dict(self):
+        assert_that(self.delete.delete_student).raises(TypeError).when_called_with({0: 0})
+
+    def test_delete_student_is_list(self):
+        assert_that(self.delete.delete_student).raises(TypeError).when_called_with([0])
