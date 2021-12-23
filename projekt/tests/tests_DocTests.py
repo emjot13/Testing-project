@@ -222,6 +222,30 @@ class Tests_edit_subject:
     Traceback (most recent call last):
     ...
     TypeError: Given value: "{'subject': 'polski'}" is not a string
+    >>> obj.edit_subject(1, "matma", "polski")             #tests for non-existent index value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.edit_subject(-1, "matma", "polski")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.edit_subject(100, "matma", "polski")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.edit_subject(0, "MATMA", "polski")             #tests for non-existent subject name value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.edit_subject(0, "matma ", "polski")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.edit_subject(0, " matma", "polski")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
     """
 
 
