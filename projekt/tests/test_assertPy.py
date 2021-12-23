@@ -408,3 +408,12 @@ class Tests(unittest.TestCase):
     def test_assert_edit_annotation_non_existent_annotation2(self):
         self.temp2.add_annotation(0, "zachowanie", "bdb")
         assert_that(self.temp2.edit_annotation).raises(ValueError).when_called_with(100, "zachowanie ", "bdb")
+
+    def test_assert_csv_export_filename_not_correct(self):
+        assert_that(self.temp2.csv_export).raises(TypeError).when_called_with(436363)
+
+    def test_assert_csv_export_filename_not_correct1(self):
+        assert_that(self.temp2.csv_export).raises(TypeError).when_called_with(["file"])
+
+    def test_assert_csv_export_filename_not_csv_file(self):
+        assert_that(self.temp2.csv_export).raises(ValueError).when_called_with("file.jpg")
