@@ -2,6 +2,7 @@ import re
 import csv
 from csv import reader
 
+
 class E_gradebook:
     def __init__(self):
         self.students = []
@@ -34,7 +35,6 @@ class E_gradebook:
         if not is_index:
             raise ValueError("Student with given index has not been found")
 
-
     def edit_student(self, index, new_value):
         self.string_error(new_value)
         self.index_error(index)
@@ -47,7 +47,6 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
         if len(new_value.split()) < 2:
             raise ValueError("Student must have a name and a surname")
-
 
     def add_subject(self, index, subject_name):
         self.index_error(index)
@@ -110,7 +109,6 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
         if not is_subject:
             raise ValueError("Student with this index does not attend given subject")
-
 
     def edit_grade(self, index, subject_name, description, grade):
         self.index_error(index)
@@ -253,3 +251,8 @@ class E_gradebook:
                     obj.add_grade(myindex, item[0], grade[0], grade[1])
             for item in annotations:
                 obj.add_annotation(myindex, item[0], " i ".join(item[1]))
+
+    def print_students(self):
+        to_print = str(self.students).replace("},", '},\n').replace("[[", "[[\n").replace("]]", "\n]]").replace(" [{",
+                                                                                                                "\n\n [{")
+        print(to_print)
