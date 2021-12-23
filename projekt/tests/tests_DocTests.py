@@ -53,6 +53,20 @@ class Tests:
     Traceback (most recent call last):
     ...
     TypeError: Given value: "{'subject': 'matma'}" is not a string
+    >>> obj.add_subject(1, "matma")             #tests for non-existent index value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.add_subject(-1, "matma")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.add_subject(100, "matma")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+
+
     """
 
 
