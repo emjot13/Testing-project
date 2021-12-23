@@ -239,6 +239,16 @@ class Tests(unittest.TestCase):
         assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(0, "matma ")
 
 
+    def test_assert_subject_average_no_grades(self):
+        assert_that(self.temp2.subject_average).raises(Exception).when_called_with(0, "matma")  #exception as there are no grades so we would have to divide by zero
+
+
+    def test_assert_subject_average(self):
+        self.temp2.add_grade(0, "matma", "spr", 5)
+        self.temp2.add_grade(0, "matma", "spr1", 4)
+        self.temp2.subject_average(0, "matma")
+        assert_that(self.temp2.students[0][0]["average grades"]["average matma grade"]).is_equal_to(4.5)
+
 
 
 
