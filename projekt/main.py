@@ -91,3 +91,18 @@ class E_gradebook:
         self.index_error(index)
         self.string_error(description)
         self.string_error(subject_name)
+        is_index, is_subject = False, False
+        if type(grade) not in [int, float]:
+            raise TypeError("Given grade must be a number")
+        if not 1 <= grade <= 6:
+            raise ValueError("Given grade must be between 1 and 6")
+        for item in self.students:
+            if index in item[0].keys():
+                is_index = True
+                if subject_name in item[1].keys():
+                    is_subject = True
+                    item[1][subject_name][description] = grade
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+        if not is_subject:
+            raise ValueError("Student with this index does not attend given subject")
