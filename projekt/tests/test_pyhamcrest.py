@@ -205,14 +205,23 @@ class Tests(unittest.TestCase):
         self.one.edit_subject(0, "matma", "polski")
         assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {"polski": {}}]]))
 
-    def test_assert_add_annotation(self):
+    def test_assert_add_annotation_not_empty(self):
         self.one.add_annotation(0, "zachowanie", "bdb")
         assert_that(bool(self.one.students[0][0]["annotations"]), is_(True))
 
-    def test_assert_add_annotation_correct_key(self):
+    def test_assert_add_annotation_correct_entry(self):
         self.one.add_annotation(0, "zachowanie", "bdb")
         assert_that(self.one.students[0][0]["annotations"], has_entry("zachowanie", "bdb"))
 
+    def test_assert_edit_annotation_not_empty(self):
+        self.one.add_annotation(0, "zachowanie", "bdb")
+        self.one.edit_annotation(0, "zachowanie", "ndst")
+        assert_that(bool(self.one.students[0][0]["annotations"]), is_(True))
+
+    def test_assert_edit_annotation_correct_entry(self):
+        self.one.add_annotation(0, "zachowanie", "bdb")
+        self.one.add_annotation(0, "zachowanie", "ndst")
+        assert_that(self.one.students[0][0]["annotations"], has_entry("zachowanie", "ndst"))
 
 
 
