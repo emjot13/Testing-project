@@ -149,3 +149,20 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
         if not is_subject:
             raise ValueError("Student with this index does not attend given subject")
+
+    def overall_average(self, index):
+        self.index_error(index)
+        suma, count = 0, 0
+        is_index, are_subjects = False, False
+        for item in self.students:
+            if index in item[0].keys():
+                is_index = True
+                if len(item[1].values()) == 0:
+                    raise Exception("This student does not have any subjects yet")
+                for k in item[1].values():
+                    count += 1
+                    if len(k.values()) != 0:
+                        suma += round(sum(k.values()) / len(k), 2)
+                item[0]["overall average"] = round(suma / count, 2)
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
