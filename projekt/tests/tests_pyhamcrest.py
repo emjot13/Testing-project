@@ -145,4 +145,15 @@ class Tests(unittest.TestCase):
         self.one.delete_subject(0, "matma")
         assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]]))
 
+    def test_after_editing_object_is_still_dict(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1], instance_of(dict))
+
+    def test_after_editing_object_dict_is_not_empty(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(bool(self.one.students[0][1]), is_(True))
+
+
+
+
 
