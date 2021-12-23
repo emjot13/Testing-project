@@ -417,3 +417,12 @@ class Tests(unittest.TestCase):
 
     def test_assert_csv_export_filename_not_csv_file(self):
         assert_that(self.temp2.csv_export).raises(ValueError).when_called_with("file.jpg")
+
+    def test_assert_csv_import_filename_not_correct(self):
+        assert_that(self.temp2.csv_import).raises(TypeError).when_called_with(436363)
+
+    def test_assert_csv_import_filename_not_correct1(self):
+        assert_that(self.temp2.csv_import).raises(TypeError).when_called_with(["file"])
+
+    def test_assert_csv_import_filename_not_csv_file(self):
+        assert_that(self.temp2.csv_import).raises(ValueError).when_called_with("file")
