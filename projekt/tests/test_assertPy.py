@@ -397,3 +397,14 @@ class Tests(unittest.TestCase):
 
 
 
+    def test_assert_edit_annotation_non_existent_annotation(self):
+        self.temp2.add_annotation(0, "zachowanie", "bdb")
+        assert_that(self.temp2.edit_annotation).raises(ValueError).when_called_with(1, "ZACHOWANIE", "bdb")
+
+    def test_assert_edit_annotation_non_existent_annotation1(self):
+        self.temp2.add_annotation(0, "zachowanie", "bdb")
+        assert_that(self.temp2.add_annotation).raises(ValueError).when_called_with(-1, " zachowanie", "bdb")
+
+    def test_assert_edit_annotation_non_existent_annotation2(self):
+        self.temp2.add_annotation(0, "zachowanie", "bdb")
+        assert_that(self.temp2.edit_annotation).raises(ValueError).when_called_with(100, "zachowanie ", "bdb")
