@@ -48,3 +48,10 @@ class E_gradebook:
     def add_subject(self, index, subject_name):
         self.index_error(index)
         self.string_error(subject_name)
+        is_index = False
+        for item in self.students:
+            if index in item[0].keys():
+                item[1][subject_name] = {}
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
