@@ -332,7 +332,14 @@ class Tests(unittest.TestCase):
     def test_assert_add_annotation_content_is_list(self):
         assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", ["bdb"])
 
+    def test_assert_add_annotation_non_existent_index(self):
+        assert_that(self.temp2.add_annotation).raises(ValueError).when_called_with(1, "zachowanie", "bdb")
 
+    def test_assert_add_annotation_non_existent_index1(self):
+        assert_that(self.temp2.add_annotation).raises(ValueError).when_called_with(-1, "zachowanie", "bdb")
+
+    def test_assert_add_annotation_non_existent_index2(self):
+        assert_that(self.temp2.add_annotation).raises(ValueError).when_called_with(100, "zachowanie", "bdb")
 
 
 
