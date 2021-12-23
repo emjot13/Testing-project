@@ -217,6 +217,29 @@ class Tests(unittest.TestCase):
     def test_assert_subject_average_subject_is_list(self):
         assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, ["matma"])
 
+    def test_assert_subject_average_non_existent_index(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(1, "matma")
+
+    def test_assert_subject_average_non_existent_index1(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(-1, "matma")
+
+    def test_assert_subject_average_non_existent_index2(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(100, "matma")
+
+    def test_assert_subject_average_non_existent_subject(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(0, "polski")
+
+    def test_assert_subject_average_non_existent_subject1(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(0, "MATMA")
+
+    def test_assert_subject_average_non_existent_subject2(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(0, " matma")
+
+    def test_assert_subject_average_non_existent_subject3(self):
+        assert_that(self.temp2.subject_average).raises(ValueError).when_called_with(0, "matma ")
+
+
+
 
 
 
