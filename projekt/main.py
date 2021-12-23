@@ -206,3 +206,50 @@ class E_gradebook:
         with open(filename, 'w') as f:
             writer = csv.writer(f)
             writer.writerow(self.students)
+
+    def csv_import(self, filename):
+        obj = E_gradebook()
+        self.string_error(filename)
+        if not re.search('([a-zA-Z0-9\s_\\.\-\(\):])+(.csv)$', filename):
+            raise ValueError("Given file name is incorrect")
+        table = []
+        subjects = []
+        annotations = []
+        with open('csv_import', 'r') as r:
+            csv_reader = reader(r)
+            for row in csv_reader:
+                table.append(row)
+        for item in table:
+            name = item[0]
+            subjects_index = item.index("przedmioty")
+            other_info_index = item.index("uwagi")
+            for value in item[subjects_index + 1:other_info_index]:
+                splitted = value.split()
+                new_subject = []
+                new_subject.append(value.split()[0])
+                for char in splitted:
+                    if char.isdigit():
+                        ind = splitted.index(char)
+                        splitted.pop(ind)
+                        new_subject.append([splitted[ind - 1], int(char)])
+                subjects.append(new_subject)
+            for value in item[other_info_index + 1::]:
+                splitted = value.split()
+                annotations.append([splitted[0], splitted[1::]])
+
+                for char in splitted:
+                    if char == ";":
+                        ind = splitted.index(char)
+                        toadd = splitted[ind + 1::]
+                        splitted.pop(splitted.index(char))
+                        annotations.append([splitted[0], splitted[1:ind], toadd[0], toadd[1::]])
+            obj.add_student(name)
+            for item in self.students:
+                if name in item[0].values():
+                    myindex = list(item[0].keys())[list(item[0].values()).index(name)]
+            for item in subjects:
+                obj.add_subject(myindex, item[0])
+                for grade in item[1::]:
+                    obj.add_grade(myindex, item[0], grade[0], grade[1])
+            for item in annotations:
+                obj.add_annotation(myindex, item[0], " i ".join(item[1]))
