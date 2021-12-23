@@ -86,3 +86,8 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
         if not is_subject:
             raise ValueError("Student with this index does not attend given subject")
+
+    def add_grade(self, index, subject_name, description, grade):
+        self.index_error(index)
+        self.string_error(description)
+        self.string_error(subject_name)
