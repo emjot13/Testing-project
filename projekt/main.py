@@ -171,3 +171,10 @@ class E_gradebook:
         self.index_error(index)
         self.string_error(category)
         self.string_error(content)
+        is_index = False
+        for item in self.students:
+            if index in item[0].keys():
+                item[0]["annotations"][category] = content
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
