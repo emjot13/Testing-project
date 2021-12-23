@@ -166,3 +166,8 @@ class E_gradebook:
                 item[0]["overall average"] = round(suma / count, 2)
         if not is_index:
             raise ValueError("Student with given index has not been found")
+
+    def add_annotation(self, index, category, content):
+        self.index_error(index)
+        self.string_error(category)
+        self.string_error(content)
