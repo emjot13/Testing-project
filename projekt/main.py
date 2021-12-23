@@ -45,4 +45,6 @@ class E_gradebook:
             raise ValueError("Student must have a name and a surname")
 
 
-    
+    def add_subject(self, index, subject_name):
+        self.index_error(index)
+        self.string_error(subject_name)
