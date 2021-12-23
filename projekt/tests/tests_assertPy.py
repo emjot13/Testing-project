@@ -135,7 +135,6 @@ class Tests(unittest.TestCase):
         assert_that(self.temp1.edit_student).raises(TypeError).when_called_with(0.0)
 
 
-
     def test_assert_edit_student_successful(self):
         self.temp1.edit_student(0, "Kasia KKK")
         assert_that(self.temp1.students[0][0][0]).is_equal_to("Kasia KKK")
@@ -172,7 +171,22 @@ class Tests(unittest.TestCase):
 
 
 
+    def test_edit_student_no_student_with_given_index(self):
+        assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(1, "Kasia K")
 
+    def test_edit_student_no_student_with_negative_index(self):
+        assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(-1, "Kasia K")
+
+
+
+    def test_assert_edit_student_has_full_name(self):
+        assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(0, "Kasia")
+
+    def test_assert_edit_student_has_full_name_space_before(self):
+        assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(0, " Kasia")
+
+    def test_assert_edit_student_has_full_name_space_after(self):
+        assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(0, "Kasia ")
 
 
 
