@@ -249,6 +249,31 @@ class Tests(unittest.TestCase):
         self.temp2.subject_average(0, "matma")
         assert_that(self.temp2.students[0][0]["average grades"]["average matma grade"]).is_equal_to(4.5)
 
+    def test_assert_overall_average_index_is_float(self):
+        assert_that(self.temp2.overall_average).raises(TypeError).when_called_with(0.0)
+
+    def test_assert_overall_average_index_is_none(self):
+        assert_that(self.temp2.overall_average).raises(TypeError).when_called_with(None)
+
+    def test_assert_overall_average_index_is_str(self):
+        assert_that(self.temp2.overall_average).raises(TypeError).when_called_with("0")
+
+    def test_assert_overall_average_index_is_bool(self):
+        assert_that(self.temp2.overall_average).raises(TypeError).when_called_with(True)
+
+    def test_assert_overall_average_index_is_list(self):
+        assert_that(self.temp2.overall_average).raises(TypeError).when_called_with([0])
+
+
+    def test_assert_overall_average_non_existent_index(self):
+        assert_that(self.temp2.overall_average).raises(ValueError).when_called_with(1)
+
+    def test_assert_overall_average_non_existent_index1(self):
+        assert_that(self.temp2.overall_average).raises(ValueError).when_called_with(-1)
+
+    def test_assert_overall_average_non_existent_index2(self):
+        assert_that(self.temp2.overall_average).raises(ValueError).when_called_with(100)
+
 
 
 
