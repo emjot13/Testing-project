@@ -287,5 +287,52 @@ class Tests(unittest.TestCase):
         self.temp2.overall_average(0)
         assert_that(self.temp2.students[0][0]["overall average"]).is_equal_to(3.0)
 
+    def test_assert_add_annotation_index_is_float(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0.0, "zachowanie", "bdb")
+
+    def test_assert_add_annotation_index_is_none(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(None, "zachowanie", "bdb")
+
+    def test_assert_add_annotation_index_is_str(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with("0", "zachowanie", "bdb")
+
+    def test_assert_add_annotation_index_is_bool(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(True, "zachowanie", "bdb")
+
+    def test_assert_add_annotation_index_is_list(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with([0], "zachowanie", "bdb")
+
+    def test_assert_add_annotation_category_is_float(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, 0.0, "bdb")
+
+    def test_assert_add_annotation_category_is_none(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, None, "bdb")
+
+    def test_assert_add_annotation_category_is_int(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, 0, "bdb")
+
+    def test_assert_add_annotation_category_is_bool(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, False, "bdb")
+
+    def test_assert_add_annotation_category_is_list(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, ["matma"], "bdb")
+
+    def test_assert_add_annotation_content_is_float(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", 0.0)
+
+    def test_assert_add_annotation_content_is_none(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", None)
+
+    def test_assert_add_annotation_content_is_int(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", 0)
+
+    def test_assert_add_annotation_content_is_bool(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", True)
+
+    def test_assert_add_annotation_content_is_list(self):
+        assert_that(self.temp2.add_annotation).raises(TypeError).when_called_with(0, "zachowanie", ["bdb"])
+
+
+
 
 
