@@ -1,7 +1,7 @@
 from projekt.main import E_gradebook
 
 
-class Tests:
+class Tests_add_subject:
     """
     >>> obj = E_gradebook()
     >>> obj.add_student("Kasia K")              # tests for incorrect index values
@@ -65,9 +65,62 @@ class Tests:
     Traceback (most recent call last):
     ...
     ValueError: Student with given index has not been found
-
-
     """
+
+class Tests_delete_subject:
+    """
+    >>> obj = E_gradebook()
+    >>> obj.add_student("Kasia K")              # tests for incorrect index values
+    >>> obj.add_subject("0", "matma")           # string
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject([0], "matma")           # list
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject(0.0, "matma")           # float
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject(None, "matma")          # none
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject(True, "matma")          # bool
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject({0:0}, "matma")          # dict
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.delete_subject(0, 0)                    # tests for incorrect subject name values int
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0" is not a string
+    >>> obj.delete_subject(0, ["matma"])            # list
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "['matma']" is not a string
+    >>> obj.delete_subject(0, 0.0)                  # float
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0.0" is not a string
+    >>> obj.delete_subject(0, None)                 # none
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "None" is not a string
+    >>> obj.delete_subject(0, False)                # bool
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "False" is not a string
+    >>> obj.delete_subject(0, {"subject":"matma"}) # dict
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "{'subject': 'matma'}" is not a string
+    """
+
 
 
 if __name__ == "__main__":
