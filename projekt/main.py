@@ -59,3 +59,14 @@ class E_gradebook:
     def delete_subject(self, index, subject_name):
         self.index_error(index)
         self.string_error(subject_name)
+        is_index, is_subject = False, False
+        for item in self.students:
+            if index in item[0].keys():
+                if subject_name in item[1].keys():
+                    is_subject = True
+                    del item[1][subject_name]
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+        if not is_subject:
+            raise ValueError("Student with this index does not attend given subject")
