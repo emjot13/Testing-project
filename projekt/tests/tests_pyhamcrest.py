@@ -112,3 +112,37 @@ class Tests(unittest.TestCase):
         for k in range(5):
             self.one.add_subject(k, "matma")
         assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}]]))
+
+    def test_delete_is_dict_after_deleting_only_subject(self):
+        self.one.delete_subject(0, "matma")
+        assert_that(self.one.students[0][1], instance_of(dict))
+
+    def test_delete_is_empty_dict_after_deleting_only_subject(self):
+        self.one.delete_subject(0, "matma")
+        assert_that(bool(self.one.students[0][1]), is_(False))
+
+    def test_successfully_deletes_5_subjects(self):
+        for x in range(1, 5):
+            self.one.add_subject(0, "matma" + str(x))
+        for x in range(0, 5):
+            if x == 0:
+                self.one.delete_subject(0, "matma")
+            else:
+                self.one.delete_subject(0, "matma" + str(x))
+        assert_that(bool(self.one.students[0][1]), is_(False))
+
+    def test_successfully_deletes_10_subjects(self):
+        for x in range(1, 10):
+            self.one.add_subject(0, "matma" + str(x))
+        for x in range(0, 10):
+            if x == 0:
+                self.one.delete_subject(0, "matma")
+            else:
+                self.one.delete_subject(0, "matma" + str(x))
+        assert_that(bool(self.one.students[0][1]), is_(False))
+
+    def test_delete_subject_return_correctly(self):
+        self.one.delete_subject(0, "matma")
+        assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {}]]))
+
+
