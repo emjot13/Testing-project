@@ -34,9 +34,15 @@ class E_gradebook:
     def edit_student(self, index, new_value):
         self.string_error(new_value)
         self.index_error(index)
+        is_index = False
         for item in self.students:
             if index in item[0].keys():
                 item[0][index] = new_value
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+        if len(new_value.split()) < 2:
+            raise ValueError("Student must have a name and a surname")
 
 
-
+    
