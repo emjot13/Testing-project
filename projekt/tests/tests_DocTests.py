@@ -119,6 +119,30 @@ class Tests_delete_subject:
     Traceback (most recent call last):
     ...
     TypeError: Given value: "{'subject': 'matma'}" is not a string
+    >>> obj.delete_subject(1, "matma")             #tests for non-existent index value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.delete_subject(-1, "matma")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.delete_subject(100, "matma")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.delete_subject(0, "MATMA")             #tests for non-existent subject name value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.delete_subject(0, "matma ")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.delete_subject(0, " matma")
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
     """
 
 
