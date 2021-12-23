@@ -8,6 +8,10 @@ class Tests(unittest.TestCase):
         self.one = E_gradebook()
         self.two = E_gradebook()
         self.three = E_gradebook()
+        self.one.add_student("Kasia K")
+        self.one.add_subject(0, "matma")
+
+
 
     def test_is_any_instance(self):
         assert_that(self.temp, not_none())
@@ -52,52 +56,59 @@ class Tests(unittest.TestCase):
         assert_that(after - before), equal_to(1)
 
     def test_add_student_successful(self):
-        self.one.add_student("Kasia K")
         assert_that(bool(self.one.students), is_(True))
 
     def test_add_student_successful2(self):
-        self.one.add_student("Kasia K")
         assert_that(bool(self.one.students)), equal_to(1)
 
     def test_add_student_basic_info_is_dict(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0], instance_of(dict))
 
     def test_added_correct_value(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0], has_value("Kasia K"))
 
     def test_add_student_additional_info_is_dict(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][1], instance_of(dict))
 
 
     def test_add_student_has_annotation_key(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0], has_key("annotations"))
 
 
     def test_add_student_has_average_grades_key(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0], has_key("average grades"))
 
     def test_add_annotation_is_dict(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0]["annotations"], instance_of(dict))
 
     def test_add_student_average_grades_is_dict(self):
-        self.one.add_student("Kasia K")
         assert_that(self.one.students[0][0]["average grades"], instance_of(dict))
 
     def test_add_student_annotations_dict_is_empty(self):
-        self.one.add_student("Kasia K")
         assert_that(bool(self.one.students[0][0]["annotations"]), is_(False))
 
 
     def test_add_student_average_grades_dict_is_empty(self):
-        self.one.add_student("Kasia K")
         assert_that(bool(self.one.students[0][0]["average grades"]), is_(False))
 
-    def test_add_student_average_grades_dict_is_empty(self):
-        self.one.add_student("Kasia K")
-        assert_that(bool(self.one.students[0][1]), is_(False))
+    def test_add_subject_added(self):
+        assert_that(bool(self.one.students[0][1]), is_(True))
+
+    def test_add_subject_added_correct_subject_name(self):
+        assert_that(self.one.students[0][1], has_key("matma"))
+
+    def test_add_subject_subject_value_is_dict(self):
+        assert_that(self.one.students[0][1], instance_of(dict))
+
+    def test_add_subject_subject_value_is_empty_dict(self):
+        assert_that(bool(self.one.students[0][1]["matma"]), is_(False))
+
+    def test_add_subject_returns_correctly(self):
+        assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}]]))
+
+    def test_add_subject_returns_correctly_for_5_students(self):
+        for k in range(4):
+            self.one.add_student("Kasia K")
+        for k in range(5):
+            self.one.add_subject(k, "matma")
+        assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{1: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{2: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{3: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}], [{4: 'Kasia K', 'annotations': {}, 'average grades': {}}, {'matma': {}}]]))
