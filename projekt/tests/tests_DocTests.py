@@ -325,7 +325,30 @@ class Tests_add_grade:
     Traceback (most recent call last):
     ...
     TypeError: Given value: "{'subject': 'polski'}" is not a string
-
+    >>> obj.add_grade(1, "matma", "spr", 5)             #tests for non-existent index value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.add_grade(-1, "matma", "spr", 5)
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.add_grade(100, "matma", "spr", 5)
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with given index has not been found
+    >>> obj.add_grade(0, "MATMA", "spr", 5)             #tests for non-existent subject name value
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.add_grade(0, "matma ", "spr", 5)
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
+    >>> obj.add_grade(0, " matma", "spr", 5)
+    Traceback (most recent call last):
+    ...
+    ValueError: Student with this index does not attend given subject
     """
 
 
