@@ -248,6 +248,88 @@ class Tests_edit_subject:
     ValueError: Student with this index does not attend given subject
     """
 
+class Tests_add_grade:
+    """
+    >>> obj = E_gradebook()
+    >>> obj.add_student("Kasia K")
+    >>> obj.add_subject(0, "matma")
+    >>> obj.add_grade("0", "matma", "spr", 5)      # tests for incorrect index values
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade([0], "matma", "spr", 5)           # list
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade(0.0, "matma", "spr", 5)           # float
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade(None, "matma", "spr", 5)          # none
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade(True, "matma", "spr", 5)          # bool
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade({0:0}, "matma", "spr", 5)          # dict
+    Traceback (most recent call last):
+    ...
+    TypeError: Index must be an integer
+    >>> obj.add_grade(0, 0,"spr", 5)                    # tests for incorrect subject name values int
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0" is not a string
+    >>> obj.add_grade(0, ["matma"], "spr", 5)            # list
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "['matma']" is not a string
+    >>> obj.add_grade(0, 0.0, "spr", 5)                  # float
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0.0" is not a string
+    >>> obj.add_grade(0, None, "spr", 5)                 # none
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "None" is not a string
+    >>> obj.add_grade(0, False, "spr", 5)                # bool
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "False" is not a string
+    >>> obj.add_grade(0, {"subject":"matma"}, "spr", 5) # dict
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "{'subject': 'matma'}" is not a string
+    >>> obj.add_grade(0, "matma", 0, 5)                    # tests for incorrect description
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0" is not a string
+    >>> obj.add_grade(0, "matma", ["spr"], 5)            # list
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "['spr']" is not a string
+    >>> obj.add_grade(0, "matma", 0.0, 5)                  # float
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "0.0" is not a string
+    >>> obj.add_grade(0, "matma", None, 5)                 # none
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "None" is not a string
+    >>> obj.add_grade(0, "matma", False, 5)                # bool
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "False" is not a string
+    >>> obj.add_grade(0, "matma", {"subject":"polski"}, 5) # dict
+    Traceback (most recent call last):
+    ...
+    TypeError: Given value: "{'subject': 'polski'}" is not a string
+
+    """
+
+
+
 
 
 if __name__ == "__main__":
