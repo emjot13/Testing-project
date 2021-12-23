@@ -178,3 +178,19 @@ class E_gradebook:
                 is_index = True
         if not is_index:
             raise ValueError("Student with given index has not been found")
+
+    def edit_annotation(self, index, category, new_content):
+        self.index_error(index)
+        self.string_error(category)
+        self.string_error(new_content)
+        is_category, is_index = False, False
+        for item in self.students:
+            if index in item[0].keys():
+                if category in item[0]["annotations"].keys():
+                    item[0]["annotations"][category] = new_content
+                    is_category = True
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+        if not is_category:
+            raise ValueError("This student does not have given annotation category")
