@@ -55,3 +55,7 @@ class E_gradebook:
                 is_index = True
         if not is_index:
             raise ValueError("Student with given index has not been found")
+
+    def delete_subject(self, index, subject_name):
+        self.index_error(index)
+        self.string_error(subject_name)
