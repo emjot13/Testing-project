@@ -153,6 +153,61 @@ class Tests(unittest.TestCase):
         self.one.edit_subject(0, "matma", "polski")
         assert_that(bool(self.one.students[0][1]), is_(True))
 
+    def test_after_editing_there_is_not_previous_value(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1], not_(has_key("matma")))
+
+    def test_after_editing_correct_value(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1], has_key("polski"))
+
+    def test_successfully_edites_5_subjects(self):
+        for x in range(1, 5):
+            self.one.add_subject(0, "matma" + str(x))
+        for x in range(0, 5):
+            if x == 0:
+                self.one.edit_subject(0, "matma", "polski")
+            else:
+                self.one.edit_subject(0, "matma" + str(x), "polski" + str(x))
+        for x in range(0, 5):
+            assert_that(self.one.students[0][1]), has_key("polski" + str(x))
+
+    def test_successfully_edites_10_subjects(self):
+        for x in range(1, 10):
+            self.one.add_subject(0, "matma" + str(x))
+        for x in range(0, 10):
+            if x == 0:
+                self.one.edit_subject(0, "matma", "polski")
+            else:
+                self.one.edit_subject(0, "matma" + str(x), "polski" + str(x))
+        for x in range(0, 10):
+            assert_that(self.one.students[0][1]), has_key("polski" + str(x))
+
+    def test_data_type_of_value_of_edited_subject_is_dict(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1]["polski"], instance_of(dict))
+
+    def test_data_type_of_value_of_edited_subject_is_empty_dict(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(bool(self.one.students[0][1]["polski"]), is_(False))
+
+    def test_editing_subject_name_doesnt_change_values(self):
+        self.one.students[0][1]["matma"] = {"spr1": 5}
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1]["polski"], has_value(5))
+
+    def test_editing_subject_name_doesnt_change_keys(self):
+        self.one.students[0][1]["matma"] = {"spr1": 5}
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students[0][1]["polski"], has_key("spr1"))
+
+    def test_edit_subject_returns_correctly(self):
+        self.one.edit_subject(0, "matma", "polski")
+        assert_that(self.one.students, equal_to([[{0: 'Kasia K', 'annotations': {}, 'average grades': {}}, {"polski": {}}]]))
+
+
+
+
 
 
 
