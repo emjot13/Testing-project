@@ -130,3 +130,7 @@ class E_gradebook:
             raise ValueError("Student with this index does not attend given subject")
         if not is_description:
             raise ValueError("This student does not have a grade with such description")
+
+    def subject_average(self, index, subject_name):
+        self.index_error(index)
+        self.string_error(subject_name)
