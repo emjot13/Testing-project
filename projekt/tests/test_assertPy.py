@@ -274,8 +274,18 @@ class Tests(unittest.TestCase):
     def test_assert_overall_average_non_existent_index2(self):
         assert_that(self.temp2.overall_average).raises(ValueError).when_called_with(100)
 
+    def test_assert_overall_average_no_grades(self):
+        self.temp2.delete_subject(0, "matma")
+        assert_that(self.temp2.overall_average).raises(Exception).when_called_with(0, "matma")
 
 
+    def test_assert_overall_average(self):
+        self.temp2.add_subject(0, "polski")
+        self.temp2.add_grade(0, "polski", "spr", 4)
+        self.temp2.add_grade(0, "matma", "spr", 3)
+        self.temp2.add_grade(0, "matma", "spr1", 1)
+        self.temp2.overall_average(0)
+        assert_that(self.temp2.students[0][0]["overall average"]).is_equal_to(3.0)
 
 
 
