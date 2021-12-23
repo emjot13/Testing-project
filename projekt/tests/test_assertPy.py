@@ -7,6 +7,9 @@ class Tests(unittest.TestCase):
         self.temp = E_gradebook()
         self.temp1 = E_gradebook()
         self.temp1.add_student("Kasia K")
+        self.temp2 = E_gradebook()
+        self.temp2.add_student("Kasia K")
+        self.temp2.add_subject(0, "matma")
 
     def test_assert_init_object_is_empty(self):
         assert_that(bool(self.temp.students)).is_false() # checking if initial value of object is empty
@@ -168,16 +171,11 @@ class Tests(unittest.TestCase):
         self.temp1.edit_student(0, "Kasia KKKKKK")
         assert_that(self.temp1.students).is_equal_to([[{0: 'Kasia KKKKKK', 'annotations': {}, 'average grades': {}}, {}]])
 
-
-
-
     def test_edit_student_no_student_with_given_index(self):
         assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(1, "Kasia K")
 
     def test_edit_student_no_student_with_negative_index(self):
         assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(-1, "Kasia K")
-
-
 
     def test_assert_edit_student_has_full_name(self):
         assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(0, "Kasia")
@@ -187,6 +185,39 @@ class Tests(unittest.TestCase):
 
     def test_assert_edit_student_has_full_name_space_after(self):
         assert_that(self.temp1.edit_student).raises(ValueError).when_called_with(0, "Kasia ")
+
+
+    def test_assert_subject_average_index_is_float(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0.0, "matma")
+
+    def test_assert_subject_average_index_is_none(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(None, "matma")
+
+    def test_assert_subject_average_index_is_str(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with("0", "matma")
+
+    def test_assert_subject_average_index_is_bool(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(True, "matma")
+
+    def test_assert_subject_average_index_is_list(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with([0], "matma")
+
+    def test_assert_subject_average_subject_is_float(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, 0.0)
+
+    def test_assert_subject_average_subject_is_none(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, None)
+
+    def test_assert_subject_average_subject_is_int(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, 0)
+
+    def test_assert_subject_average_subject_is_bool(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, False)
+
+    def test_assert_subject_average_subject_is_list(self):
+        assert_that(self.temp2.subject_average).raises(TypeError).when_called_with(0, ["matma"])
+
+
 
 
 
