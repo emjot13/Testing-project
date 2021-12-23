@@ -107,6 +107,7 @@ class E_gradebook:
         if not is_subject:
             raise ValueError("Student with this index does not attend given subject")
 
+
     def edit_grade(self, index, subject_name, description, grade):
         self.index_error(index)
         self.string_error(subject_name)
@@ -134,3 +135,17 @@ class E_gradebook:
     def subject_average(self, index, subject_name):
         self.index_error(index)
         self.string_error(subject_name)
+        is_index, is_subject = False, False
+        for item in self.students:
+            if index in item[0].keys():
+                if subject_name in item[1].keys():
+                    is_subject = True
+                    if len(item[1][subject_name]) == 0:
+                        raise Exception("There are none grades from this subject")
+                    item[0]["average grades"][f"average {subject_name} grade"] = round(
+                        sum(item[1][subject_name].values()) / len(item[1][subject_name]), 2)
+                is_index = True
+        if not is_index:
+            raise ValueError("Student with given index has not been found")
+        if not is_subject:
+            raise ValueError("Student with this index does not attend given subject")
