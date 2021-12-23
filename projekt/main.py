@@ -1,3 +1,7 @@
+import re
+import csv
+from csv import reader
+
 class E_gradebook:
     def __init__(self):
         self.students = []
@@ -194,3 +198,11 @@ class E_gradebook:
             raise ValueError("Student with given index has not been found")
         if not is_category:
             raise ValueError("This student does not have given annotation category")
+
+    def csv_export(self, filename):
+        self.string_error(filename)
+        if not re.search('([a-zA-Z0-9\s_\\.\-\(\):])+(.csv)$', filename):
+            raise ValueError("Given file name is incorrect")
+        with open(filename, 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(self.students)
