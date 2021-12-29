@@ -1,0 +1,9 @@
+nose2
+assertpy
+pytest
+setuptools
+parameterized
+pyhamcrest
+
+[test]
+coverage

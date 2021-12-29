@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: UNKNOWN
+Version: 2.0.0
+Summary: UNKNOWN
+Home-page: UNKNOWN
+Author: Mateusz Jarzembiński
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.8, <4
+Provides-Extra: test
